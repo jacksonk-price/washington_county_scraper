@@ -41,8 +41,7 @@ def send_to_csv(detainees):
         for detainee in detainees:
             writer.writerow([detainee.name, detainee.age, detainee.race, detainee.sex, detainee.prior_bookings, detainee.intake_date])
 
-# headers for the table
-# Name | Age | Race | Sex | Prior Bookings | Intake Date
+
 table = table_container.find('table')
 
 detainees = collect_detainees(table)
