@@ -1,5 +1,5 @@
 class Detainee:
-  def __init__(name, age, race, sex, prior_bookings, intake_date):
+  def __init__(self, name, age, race, sex, prior_bookings, intake_date):
     self.name = name
     self.age = age
     self.race = race
