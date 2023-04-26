@@ -27,8 +27,10 @@ def collect_detainees(table):
         for j in range(len(row_data)):
             detainee_data.append(row_data[j].text.strip())
 
-        #                   Name              | Age             | Race            | Sex             | Prior Bookings  | Intake Date
-        detainee = Detainee(detainee_data[0], detainee_data[1], detainee_data[2], detainee_data[3], detainee_data[4], detainee_data[5])
+        first_name, last_name = split_name(detainee_data[0])
+
+        #                   First       | Last       | Age             | Race            | Sex             | Prior Bookings  | Intake Date
+        detainee = Detainee(first_name, last_name, detainee_data[1], detainee_data[2], detainee_data[3], detainee_data[4], detainee_data[5])
         detainees.append(detainee)
     return detainees
 
@@ -36,10 +38,14 @@ def send_to_csv(detainees):
     with open('../output/detainees.csv', mode='w', newline='') as file:
         writer = csv.writer(file)
         
-        writer.writerow(['name', 'age', 'race', 'sex', 'prior_bookings', 'intake_date'])
+        writer.writerow(['first_name', 'last_name', 'age', 'race', 'sex', 'prior_bookings', 'intake_date'])
         
         for detainee in detainees:
-            writer.writerow([detainee.name, detainee.age, detainee.race, detainee.sex, detainee.prior_bookings, detainee.intake_date])
+            writer.writerow([detainee.first_name, detainee.last_name, detainee.age, detainee.race, detainee.sex, detainee.prior_bookings, detainee.intake_date])
+
+def split_name(name):
+    last_name, first_name = name.split(", ")
+    return first_name, last_name
 
 
 table = table_container.find('table')
